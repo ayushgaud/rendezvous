@@ -15,11 +15,24 @@ var ros = new ROSLIB.Ros({
     url: 'ws://localhost:9090'
 });
 
+ros.on('connection', function() {
+  console.log('Connected to websocket server.');
+});
+
+ros.on('error', function(error) {
+  console.log('Error connecting to websocket server: ', error);
+});
+
+ros.on('close', function() {
+  console.log('Connection to websocket server closed.');
+});
+
+
 // Subscribing to a Topic
 // ----------------------
 var navSatFixListener = new ROSLIB.Topic({
     ros: ros,
-    name: 'drdre/gps_fix', //topic name
+    name: '/ublox_gps/fix', //topic name
     messageType: 'sensor_msgs/NavSatFix' //message Type
 });
 
@@ -34,6 +47,7 @@ navSatFixListener.subscribe(function(message) {
     if (index == 0) { // firts entry
 
         startVisualization(message.latitude, message.longitude);
+        putCenter(message.latitude, message.longitude);
         putHome(message.latitude, message.longitude);
         oldCurrentPosition[index] = new google.maps.LatLng(message.latitude, message.longitude);
         initOk = true;

@@ -19,6 +19,18 @@ function initialize() {
 
 }
 
+function putCenter(lat, lng) {
+    var position = new google.maps.LatLng(lat, lng);
+    var mapOptions = {
+        center: position,
+        zoom: 18,
+        mapTypeId: 'terrain'
+    };
+
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    map.setTilt(0); //disable 45° view
+}
+
 function putHome(lat, lng) {
     var position = new google.maps.LatLng(lat, lng);
     var Home = 'images/homeMarker.png';
