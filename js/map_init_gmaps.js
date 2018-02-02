@@ -21,14 +21,8 @@ function initialize() {
 
 function putCenter(lat, lng) {
     var position = new google.maps.LatLng(lat, lng);
-    var mapOptions = {
-        center: position,
-        zoom: 18,
-        mapTypeId: 'terrain'
-    };
-
-    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-    map.setTilt(0); //disable 45° view
+    map.setCenter(position)
+    map.setMapTypeId('terrain')
 }
 
 function putHome(lat, lng) {
@@ -73,7 +67,7 @@ function startVisualization(lat, lng) {
             fixedRotation: true
         }],
         geodesic: true,
-        strokeColor: '#FFFF00',
+        strokeColor: '#FF0000',
         strokeOpacity: 1.0,
         strokeWeight: 2
     });
